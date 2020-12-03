@@ -10,7 +10,7 @@
     <script src="Build/UnityLoader.js"></script>
     <script src="https://unpkg.com/penpal/dist/penpal.min.js"></script>
     <script>
-/*       const connection = Penpal.connectToParent({
+      const connection = Penpal.connectToParent({
         // Methods child is exposing to parent
         methods: {
           setSessionId: function() {
@@ -19,14 +19,10 @@
         }
       });
 
-      console.log(connection);
-  
-      window.setSkysmartScore = function(score, completness) {
-        parent.setScore(score, completness);
-      } */
 
       window.setSkysmartScore = function(score, completness) {
         window.parent.postMessage("mogsidr", "*");
+        parent.setScore(score, completness);
       }
     </script>
     <script>
