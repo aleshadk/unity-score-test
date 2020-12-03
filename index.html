@@ -13,6 +13,11 @@
   <script>
     var connection;
 
+    window.addEventListener("message", message => {
+      console.log('получено', message);
+      window.parent.postMessage("RECEIVED FROM PAREND " + JSON.stringify(message), "*");
+    });
+
     setTimeout(function () {
       window.parent.postMessage("CONNECTION STARTED", "*");
       connection = Penpal.connectToParent({
