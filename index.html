@@ -14,7 +14,7 @@
     var connection;
 
     setTimeout(function () {
-      console.log('CONNECTION');
+      window.parent.postMessage("CONNECTION STARTED", "*");
       connection = Penpal.connectToParent({
         // Methods child is exposing to parent
         methods: {
