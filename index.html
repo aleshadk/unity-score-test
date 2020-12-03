@@ -13,9 +13,21 @@
       const connection = Penpal.connectToParent({
         // Methods child is exposing to parent
         methods: {
-          setSessionId: function() {
-            // 
-          }
+          init: function (params) {
+            console.log('init', params);
+          },
+          dataRestored: function (params) {
+            console.log('dataRestored', params);
+          },
+          setSessionId: function (params) {
+            console.log('setSessionId', params);
+          },
+          setRoomHash: function (params) {
+            console.log('setRoomHash', params);
+          },
+          userInfoUpdated: function (params) {
+            console.log('userInfoUpdated', params);
+          },
         }
       });
 
