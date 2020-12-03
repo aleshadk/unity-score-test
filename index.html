@@ -24,6 +24,7 @@
         window.parent.postMessage("mogsidr", "*");
 
         connection.promise.then((parent) => {
+          console.log(parent);
           parent.setScore(score, completness);
         });
       }
