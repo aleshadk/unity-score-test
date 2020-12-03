@@ -12,45 +12,12 @@
   <script src="https://unpkg.com/penpal@3.0.3/dist/penpal.min.js"></script>
 
   <script>
-    var connection;
-
-    window.addEventListener("message", message => {
-      console.log('получено', message);
-      window.parent.postMessage("RECEIVED FROM PAREND " + JSON.stringify(message), "*");
+    var connection = enpal.connectToParent({
+      methods: {}
     });
 
-    setTimeout(function () {
-      connection = Penpal.connectToParent({
-        // Methods child is exposing to parent
-        methods: {
-          init: function (params) {
-            console.log('init', params);
-          },
-          dataRestored: function (params) {
-            console.log('dataRestored', params);
-          },
-          setSessionId: function (params) {
-            console.log('setSessionId', params);
-          },
-          setRoomHash: function (params) {
-            console.log('setRoomHash', params);
-          },
-          userInfoUpdated: function (params) {
-            console.log('userInfoUpdated', params);
-          },
-        }
-      });
-    }, 10000);
-
-
-
-
-
     window.setSkysmartScore = function (score, completness) {
-      window.parent.postMessage("mogsidr", "*");
-
       connection.promise.then((parent) => {
-        console.log(parent);
         parent.setScore(score, completness);
       });
     }
