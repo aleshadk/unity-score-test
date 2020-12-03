@@ -22,7 +22,10 @@
 
       window.setSkysmartScore = function(score, completness) {
         window.parent.postMessage("mogsidr", "*");
-        parent.setScore(score, completness);
+
+        connection.promise.then((parent) => {
+          parent.setScore(score, completness);
+        });
       }
     </script>
     <script>
