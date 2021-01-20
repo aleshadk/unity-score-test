@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-us">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>Custom template | Skysmart Laboratory</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Unity WebGL Player | New Unity Project</title>
-  <link rel="shortcut icon" href="TemplateData/favicon.ico">
-  <link rel="stylesheet" href="TemplateData/style.css">
-  <script src="TemplateData/UnityProgress.js"></script>
-  <script src="Build/UnityLoader.js"></script>
-  <script src="https://unpkg.com/penpal@3.0.3/dist/penpal.min.js"></script>
+      <link rel="stylesheet" href="/Template/style.css" />
 
-  <script>
-    var connection = Penpal.connectToParent({
-      methods: {}
-    });
+      <script src="Build/UnityLoader.js"></script>
+   </head>
 
-    window.setSkysmartScore = function (score, completness) {
-      connection.promise.then((parent) => {
-        parent.setScore(score, completness);
-      });
-    }
-  </script>
-  <script>
-    var unityInstance = UnityLoader.instantiate("unityContainer", "Build/now10.json", { onProgress: UnityProgress });
-  </script>
-</head>
+   <body>
+      <h2>Skysmart Unity Template</h2>
 
-<body>
-  <div class="webgl-content">
-    <div id="unityContainer" style="width: 960px; height: 600px"></div>
-    <div class="footer">
-      <div class="webgl-logo"></div>
-      <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      <div class="title">New Unity Project</div>
-    </div>
-  </div>
-</body>
+      <!-- Unity Container -->
+      <div class="webgl-content">
+         <div
+            class="centered"
+            style="width: 960px; height: 540px;"
+         >
+            <!-- Unity WebGL will be here -->
+            <div
+               id="unity-container"
+               style="width: 960px; height: 540px;"
+            ></div>
 
+            <!-- This is a simple progress bar -->
+            <div id="loader" class="loader">
+               <div class="progressbar">
+                  <div id="fill" class="fill" style="width: 0%;"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <script>
+         // Custom progressbar function
+         function customProgress(unityInstance, progress) {
+            // Change fill of the progress bar
+            const fill = document.getElementById("fill");
+            fill.style.width = progress * 100 + "%";
+
+            // If loaded, remove loader
+            if (progress === 1) {
+               const loader = document.getElementById("loader");
+               loader.remove();
+            }
+         }
+      </script>
+      <script>
+         // Unity Initialization
+         var unityInstance = UnityLoader.instantiate(
+            "unity-container",
+            "Build/Laboratory.json",
+            { onProgress: customProgress }
+         );
+      </script>
+
+      <h3>Example made by</h3>
+      <p><a href="https://edu.skysmart.ru/">Интерактивная тетрадь Skysmart</a></p>
+   </body>
 </html>
